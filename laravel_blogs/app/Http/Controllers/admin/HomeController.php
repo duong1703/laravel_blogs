@@ -10,8 +10,14 @@ use DB;
 class HomeController extends Controller
 {
     public function index(){
+        $totalAccount = DB::table('login_admins')->count();
         $totalCategory = DB::table('category_admins')->select('category')->distinct()->count('category');
         $totalSubCategory = DB::table('category_admins')->select('subcategory')->count('category');
-        return view('admin/pages/home', ['totalCategory' => $totalCategory, 'totalSubCategory'=> $totalSubCategory]);
+        return view('admin/pages/home', 
+        [
+            'totalCategory' => $totalCategory, 
+            'totalSubCategory'=> $totalSubCategory,
+            'totalAccount'=> $totalAccount,
+        ]);
     }
 }

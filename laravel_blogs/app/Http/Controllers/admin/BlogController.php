@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\admin\CategoryAdmin;
 use DB;
 use Illuminate\Http\Request;
 
@@ -13,10 +14,21 @@ class BlogController extends Controller
     }
 
     public function add(){
-        $columCate = DB::table('category_admins')->pluck('category');
-        $columSubCate = DB::table('category_admins')->pluck('subcategory');
-        // dd($columCate, $columSubCate );
-        return view('admin/pages/post/add', ['columCate' => $columCate, 'columSubCate'=> $columSubCate]);
+        $data = DB::table('category_admins') 
+                ->select(DB::raw('MIN(id) as id'), 'category')
+                ->groupBy('category')
+                ->get();
+
+        // dd($data);
+        return view('admin/pages/post/add', ['data' => $data]);
+    }
+
+    public function getSubcategories($id)
+    {
+        $subcategories = DB::table('category_admins')
+                            ->where('id', $id)
+                            ->pluck('subcategory');
+        return response()->json($subcategories);
     }
 
     public function edit(){

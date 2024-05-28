@@ -41,6 +41,7 @@ class CategoryController extends Controller
         return redirect()->back()->with('success', 'Danh mục đã được thêm thành công!');
     }
 
+
     public function delete($id){
         $category = CategoryAdmin::findOrFail($id);
         $category->delete();

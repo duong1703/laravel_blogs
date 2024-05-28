@@ -13,8 +13,8 @@
                     <a href="javascript::void(0)" class="dash-nav-item dash-nav-dropdown-toggle">
                         <i class="fas fa-users"></i> Tài khoản </a>
                     <div class="dash-nav-dropdown-menu">
-                        <a href="" class="dash-nav-dropdown-item">Danh sách</a>
-                        <a href="" class="dash-nav-dropdown-item">Thêm mới</a>
+                        <a href="/views/admin/pages/account/list" class="dash-nav-dropdown-item">Danh sách</a>
+                        <a href="/views/admin/pages/account/add" class="dash-nav-dropdown-item">Thêm mới</a>
                     </div>
                 </div>
                 <div class="dash-nav-dropdown">
@@ -37,15 +37,15 @@
                     <a href="javascript::void(0)" class="dash-nav-item dash-nav-dropdown-toggle">
                         <i class="fas fa-comments"></i> Đánh giá </a>
                     <div class="dash-nav-dropdown-menu">
-                        <a href="comment-list.html" class="dash-nav-dropdown-item">Danh sách</a>
-                        <a href="comment-add.html" class="dash-nav-dropdown-item">Thêm mới</a>
+                        <a href="#" class="dash-nav-dropdown-item">Danh sách</a>
+                        <a href="#" class="dash-nav-dropdown-item">Thêm mới</a>
                     </div>
                 </div>
                 <div class="dash-nav-dropdown">
                     <a href="javascript::void(0)" class="dash-nav-item dash-nav-dropdown-toggle">
                         <i class="fa fa-user-lock"></i> Profile </a>
                     <div class="dash-nav-dropdown-menu">
-                        <a href="" class="dash-nav-dropdown-item">Thông tin Admin</a>
+                        <a href="/views/admin/pages/profile/profile" class="dash-nav-dropdown-item">Thông tin Admin</a>
                     </div>
                 </div>
             </nav>

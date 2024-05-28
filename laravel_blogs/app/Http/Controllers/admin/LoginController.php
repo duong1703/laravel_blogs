@@ -23,7 +23,6 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        // Lấy email và mật khẩu từ request
         $email = $request->input('email');
         $password = $request->input('password');
 
@@ -31,23 +30,16 @@ class LoginController extends Controller
 
         if ($user) {
             if (Hash::check($password, $user->password)) {
-                // Đặt tên người dùng vào session
                 $request->session()->put('name', $user->name);
-
-                // Log success message
                 Log::info('User logged in successfully: ' . $user->email);
-
-                // Chuyển hướng đến trang chủ admin
-                return redirect('/views/admin/pages/home');
+                return redirect()->route('home');
             } else {
-                // Log failure message
                 Log::warning('Password mismatch for user: ' . $email);
                 return redirect()->back()->withInput($request->only('email'))->withErrors([
                     'password' => 'Password không chính xác.',
                 ]);
             }
         } else {
-            // Log failure message
             Log::warning('No user found with email: ' . $email);
             return redirect()->back()->withInput($request->only('email'))->withErrors([
                 'email' => 'Email không chính xác.',

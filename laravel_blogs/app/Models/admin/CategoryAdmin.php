@@ -14,4 +14,6 @@ class CategoryAdmin extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = ['category', 'subcategory'];
+
+
 }

@@ -34,20 +34,20 @@
                         <div class="row">
                             <div class="d-flex justify-content-between">
                                 <div class="card-body col-lg-6 ">
-                                    <label name="category" for="" class="">Danh mục bài viết</label>
-                                    <select class="form-select" id="floatingSelect"
-                                        aria-label="Floating label select example">
+                                    <label name="category" for="" class="form-label">Danh mục bài viết</label>
+                                    <select class="form-select" id="categorySelect" name="category">
                                         <option selected>Chọn danh mục bài viết</option>
-                                        
+                                        @foreach ($data as $category)
+                                            <option value="{{ $category->id }}">{{ $category->category }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="card-body col-lg-6">
-                                    <label name="category" for="" class="">Danh mục con</label>
-                                    <select class="form-select" id="floatingSelect"
-                                        aria-label="Floating label select example">
+                                    <label name="category" for="" class="form-label">Danh mục con</label>
+                                    <select class="form-select" id="subcategorySelect" name="subcategory">
                                         <option selected>Chọn danh mục con</option>
-
+                                       
                                     </select>
                                 </div>
                             </div>
@@ -70,6 +70,31 @@
 </main>
 
 
+<script>
+    $(document).ready(function () {
+        $('#categorySelect').on('change', function () {
+            let id = $(this).val();
+            $('#subcategorySelect').empty();
+            $('#subcategorySelect').append('<option value="" selected>Processing...</option>');
+            $.ajax({
+                type: 'GET',
+                url: '/get-subcategories/' + id,
+                success: function (response) {
+                    $('#subcategorySelect').empty();
+                    $('#subcategorySelect').append('<option value="{{ $category->id }}" selected>Chọn danh mục con</option>');
+                    response.forEach(function (item) {
+                        $('#subcategorySelect').append('<option value="' + item + '">' + item + '</option>');
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('AJAX Error: ', status, error);
+                }
+            });
+        });
+    });
+</script>
+
+
 <!-- Place the first <script> tag in your HTML's <head> -->
 <script src="https://cdn.tiny.cloud/1/hbozepm8v83oquejurp97p1x4p1eymqxvifr4r4izmvfi34i/tinymce/7/tinymce.min.js"
     referrerpolicy="origin"></script>
@@ -81,4 +106,5 @@ tinymce.init({
     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
 });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection

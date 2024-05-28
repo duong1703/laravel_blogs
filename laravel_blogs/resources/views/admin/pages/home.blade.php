@@ -13,7 +13,7 @@
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="stats-data">
-                        <div class="stats-number"></div>
+                        <div class="stats-number"> {{ $totalAccount }}</div>
                     </div>
                 </div>
             </div>
